@@ -1,5 +1,6 @@
 import data
 import helpers
+import time
 
 from pages import UrbanRoutesPage
 from selenium.webdriver import Chrome
@@ -16,6 +17,7 @@ class TestUrbanRoutes:
         capabilities["goog:loggingPrefs"] = {'performance': 'ALL'}
         cls.driver = Chrome()
         cls.driver.implicitly_wait(5)
+
 
         if helpers.is_url_reachable(data.URBAN_ROUTES_URL):
             print("Conectado ao servidor Urban Routes")

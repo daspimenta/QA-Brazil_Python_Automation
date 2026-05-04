@@ -31,7 +31,7 @@ class UrbanRoutesPage:
         ).click()
 
     def _type(self, locator, text):
-        element = self._find()
+        element = self._find(locator)
         element.clear()
         element.send_keys(text)
 
