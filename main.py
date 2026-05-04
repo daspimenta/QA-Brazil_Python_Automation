@@ -37,8 +37,8 @@ class TestUrbanRoutes:
 
     def test_select_plan(self):
         self.page.click_taxi_option()
-        self.page.icon_comfort_selected()
-        assert self.page.is_comfort_icon_active()
+        self.page.click_comfort_icon()
+        assert self.page.click_comfort_active()
         time.sleep(10)
 
     def test_fill_phone_number(self):

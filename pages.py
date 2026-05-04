@@ -10,9 +10,9 @@ class UrbanRoutesPage:
     to_field = (By.ID, 'to')
 
     # Fluxo de chamada de táxi
-    taxi_option = (By.XPATH, '//button[contains(text(), "Chamar")]')
-    comfort_icon = (By.XPATH, '//img[contains(@src, "kids")]')
-    comfort_active = (By.XPATH, '//*[id="root"]//div[contains(@class, "active")]')
+    taxi_option = (By.XPATH, '//button[contains(text(),"Chamar")]')
+    comfort_icon = (By.XPATH, '//img[@src="/static/media/kids.075fd8d4.svg"]')
+    comfort_active = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[2]/div[1]/div[5]')
 
     def __init__(self, driver):
         self.driver = driver
@@ -57,14 +57,13 @@ class UrbanRoutesPage:
     def click_taxi_option(self):
         self.driver.find_element(*self.taxi_option).click()
 
-    def click_icon_comfort_selected(self):
+    def click_comfort_icon(self):
         self.driver.find_element(*self.comfort_icon).click()
 
-    def is_comfort_icon_active(self):
+    def click_comfort_active(self):
         try:
-            active_button = WebDriverWait(self.driver, 15).until(
-                EC.visibility_of_element_located(self.comfort_active)
-            )
+            active_button = WebDriverWait(self.driver, 10).until(
+                EC.visibility_of_element_located(self.comfort_active))
             return "active" in active_button.get_attribute("class")
         except:
             return False
