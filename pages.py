@@ -23,9 +23,17 @@ class UrbanRoutesPage:
     number_finish = (By.CSS_SELECTOR, '.np-text')
 
 
-    #
-    payment_field = (By.XPATH, '//button[contains(text(),"Método de Pagamento")]')
-    card_option = (By.XPATH       )
+    # Metodo de Pagamento
+    add_metodo_pagamento = (By.CSS_SELECTOR, '.pp-button.filled')
+    add_card = (By.CSS_SELECTOR, '.pp-plus')
+    number_card = (By.ID, 'number')
+    code_card = (By.CSS_SELECTOR, 'input.card-input#code')
+    add_finish_card = (By.XPATH, '//button[contains(text(),"Adicionar")]')
+    close_button_card = (By.CSS_SELECTOR, '.payment-picker.open .close-button')
+    confirm_card = (By.CSS_SELECTOR, '.pp-value-text')
+
+    # Adicionar Comentario
+    add_comment = (By.ID, 'comment')
 
 
     def __init__(self, driver):
@@ -101,4 +109,25 @@ class UrbanRoutesPage:
         number = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(self.number_finish))
         return number.text
+
+    def click_add_card(self, card, code):
+        self.driver.find_element(*self.add_metodo_pagamento).click()
+        self.driver.find_element(*self.add_card).click()
+        time.sleep(1)
+        self.driver.find_element(*self.number_card).send_keys(card)
+        time.sleep(1)
+        self.driver.find_element(*self.code_card).send_keys(code)
+        time.sleep(1)
+        self.driver.find_element(*self.add_finish_card).click()
+        self.driver.find_element(*self.close_button_card).click()
+
+    def card_confirm(self):
+        return self.driver.find_element(*self.confirm_card).text
+
+    def comment_add(self, comment):
+        self.driver.find_element(*self.add_comment).send_keys(comment)
+
+    def comment_confirm(self):
+        return self.driver.find_element(self.add_comment).get_attribute('value')
+
 

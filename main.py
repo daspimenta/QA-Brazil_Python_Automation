@@ -48,14 +48,14 @@ class TestUrbanRoutes:
 
 
     def test_fill_card(self):
-        #Adicionar em S8
-        pass
-        print("função criada para preencher o número do cartão")
+        self.page.click_add_card(data.CARD_NUMBER, data.CARD_CODE)
+        assert "Cartão" in self.page.card_confirm()
+        time.sleep(10)
 
     def test_comment_for_driver(self):
-        #Adicionar em S8
-        pass
-        print("função criada para deixar mensagem para o motorista")
+        self.page.comment_add(data.MESSAGE_FOR_DRIVER)
+        assert data.MESSAGE_FOR_DRIVER in self.page.comment_confirm()
+        time.sleep(5)
 
     def test_order_blanket_and_handkerchiefs(self):
         #Adicionar em S8
