@@ -47,6 +47,11 @@ class UrbanRoutesPage:
     add_icecream = (By.CSS_SELECTOR, '.counter-plus')
     qnt_icecream = (By.CSS_SELECTOR, '.counter-value')
 
+    # Pedir um táxi
+
+    call_taxi_button = (By.CSS_SELECTOR, '.smart-button')
+    pop_up = (By.CSS_SELECTOR, '.order-header-title')
+
     # Construtor
 
     def __init__(self, driver):
@@ -161,6 +166,16 @@ class UrbanRoutesPage:
 
     def ice_cream_verify(self):
         return self.driver.find_element(*self.qnt_icecream).text
+
+    def taxi_call(self):
+        self.driver.find_element(*self.call_taxi_button).click()
+
+    def validate_popup(self):
+        popup_show = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(self.pop_up)
+        )
+        return popup_show.text
+
 
 
 
