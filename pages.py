@@ -35,6 +35,15 @@ class UrbanRoutesPage:
     # Adicionar Comentario
     add_comment = (By.ID, 'comment')
 
+    # Pedir cobertor e lenços
+
+
+
+    # Pedir dois sorvetes
+
+
+
+    #
 
     def __init__(self, driver):
         self.driver = driver
@@ -124,10 +133,11 @@ class UrbanRoutesPage:
     def card_confirm(self):
         return self.driver.find_element(*self.confirm_card).text
 
+
     def comment_add(self, comment):
         self.driver.find_element(*self.add_comment).send_keys(comment)
 
-    def comment_confirm(self):
-        return self.driver.find_element(self.add_comment).get_attribute('value')
 
+    def comment_confirm(self):
+        return self.driver.find_element(*self.add_comment).get_attribute('value')
 

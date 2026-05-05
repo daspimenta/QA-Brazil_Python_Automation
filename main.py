@@ -55,7 +55,7 @@ class TestUrbanRoutes:
     def test_comment_for_driver(self):
         self.page.comment_add(data.MESSAGE_FOR_DRIVER)
         assert data.MESSAGE_FOR_DRIVER in self.page.comment_confirm()
-        time.sleep(5)
+        time.sleep(10)
 
     def test_order_blanket_and_handkerchiefs(self):
         #Adicionar em S8
