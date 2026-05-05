@@ -14,6 +14,20 @@ class UrbanRoutesPage:
     comfort_icon = (By.XPATH, '//img[@src="/static/media/kids.075fd8d4.svg"]')
     comfort_active = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[2]/div[1]/div[5]')
 
+    # Numero de Telefone
+    number_text_locator = (By.CSS_SELECTOR, '.np-button')
+    number_enter = (By.ID, 'phone')
+    number_confirm = (By.CSS_SELECTOR, '.button.full')
+    number_code = (By.ID, 'code')
+    code_confirm = (By.XPATH, '//button[contains(text(),"Confirmar")]')
+    number_finish = (By.CSS_SELECTOR, '.np-text')
+
+
+    #
+    payment_field = (By.XPATH, '//button[contains(text(),"Método de Pagamento")]')
+    card_option = (By.XPATH       )
+
+
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
@@ -67,3 +81,24 @@ class UrbanRoutesPage:
             return "active" in active_button.get_attribute("class")
         except:
             return False
+
+    def click_phone_field(self, phone):
+        self.driver.find_element(*self.number_text_locator).click()
+        self.driver.find_element(*self.number_enter).send_keys(phone)
+        self.driver.find_element(*self.number_confirm).click()
+
+
+        code = retrieve_phone_code(self.driver)
+        code_input = WebDriverWait(self.driver, 3).until(
+            EC.visibility_of_element_located(self.number_code)
+        )
+        code_input.clear()
+        code_input.send_keys(code)
+        self.driver.find_element(*self.code_confirm).click()
+
+
+    def confirm_number(self):
+        number = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(self.number_finish))
+        return number.text
+

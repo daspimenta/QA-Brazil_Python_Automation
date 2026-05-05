@@ -28,6 +28,8 @@ class TestUrbanRoutes:
         self.driver.get(data.URBAN_ROUTES_URL)
         self.page = UrbanRoutesPage(self.driver)
         self.page.enter_locations(data.ADDRESS_FROM, data.ADDRESS_TO)
+        self.page.click_taxi_option()
+        self.page.click_comfort_icon()
 
 
     def test_set_route(self):
@@ -36,15 +38,14 @@ class TestUrbanRoutes:
         time.sleep(10)
 
     def test_select_plan(self):
-        self.page.click_taxi_option()
-        self.page.click_comfort_icon()
         assert self.page.click_comfort_active()
         time.sleep(10)
 
     def test_fill_phone_number(self):
-        #Adicionar em S8
-        pass
-        print("função criada para preencher o número de telefone")
+        self.page.click_phone_field(data.PHONE_NUMBER)
+        assert data.PHONE_NUMBER in self.page.confirm_number()
+        time.sleep(10)
+
 
     def test_fill_card(self):
         #Adicionar em S8
