@@ -37,13 +37,17 @@ class UrbanRoutesPage:
 
     # Pedir cobertor e lenços
 
+    switch_blanket = (By.CSS_SELECTOR, '.switch')
+    switch_blanket_active = (By.CSS_SELECTOR,
+                             '#root > div > div.workflow > div.workflow-subcontainer > div.tariff-picker.shown > div.form > div.reqs.open > div.reqs-body > div:nth-child(1) > div > div.r-sw > div > input')
 
 
     # Pedir dois sorvetes
 
+    add_icecream = (By.CSS_SELECTOR, '.counter-plus')
+    qnt_icecream = (By.CSS_SELECTOR, '.counter-value')
 
-
-    #
+    # Construtor
 
     def __init__(self, driver):
         self.driver = driver
@@ -140,4 +144,23 @@ class UrbanRoutesPage:
 
     def comment_confirm(self):
         return self.driver.find_element(*self.add_comment).get_attribute('value')
+
+
+    def blanket_hand_order(self):
+        blanket = self.driver.find_element(*self.switch_blanket)
+        blanket.click()
+
+    def blanket_hand_active(self):
+        blanket_active = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(self.switch_blanket_active)
+        )
+        return blanket_active.is_selected()
+
+    def ice_cream_order(self):
+        self.driver.find_element(*self.add_icecream).click()
+
+    def ice_cream_verify(self):
+        return self.driver.find_element(*self.qnt_icecream).text
+
+
 

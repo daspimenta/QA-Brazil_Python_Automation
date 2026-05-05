@@ -58,16 +58,17 @@ class TestUrbanRoutes:
         time.sleep(10)
 
     def test_order_blanket_and_handkerchiefs(self):
-        #Adicionar em S8
-        pass
-        print("função criada para pedir cobertor e lenços")
+        self.page.blanket_hand_order()
+        assert self.page.blanket_hand_active() is True
+        time.sleep(10)
+
 
     def test_order_2_ice_creams(self):
-        numbers_of_ice_creams = 2
-        for count in range(numbers_of_ice_creams):
-            #Adicionar em S8
-            print("função criada para pedir uma quantidade de sorvetes")
-            pass
+        for _ in range(2):
+            self.page.ice_cream_order()
+        assert int(self.page.ice_cream_verify()) == 2
+        time.sleep(10)
+
 
     def test_car_search_model_appears(self):
         #Adicionar em S8
